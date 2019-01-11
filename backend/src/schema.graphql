@@ -1,0 +1,50 @@
+type Query {
+  info: String!
+  getAllusers: [User!]!
+  krisskringle: [KrissKringleAnimals!]!
+  mySecretAnimal: SecretAnimal!
+}
+
+type Mutation {
+  createUser(email: String!, name: String!): User!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  password: String!
+}
+
+
+type Animal {
+  id: ID!
+  name: String!
+  description: String!
+}
+
+type PersonAnimal {
+  id: ID!
+  person: User!
+  animal: Animal!
+}
+
+type SecretAnimal {
+  id: ID!
+  person: User!
+  friend: PersonAnimal
+}
+
+type KrissKringleAnimals {
+  id: ID!
+  participants: [SecretAnimal!]
+  revealDate: String
+}
+
+
+type AuthPayload {
+  token: String
+  user: User
+}

@@ -1,0 +1,15 @@
+{
+  "name": "kriss-kringle-backend",
+  "version": "1.0.0",
+  "description": "Backend for kriss kringle project",
+  "main": "index.js",
+  "author": "marciogj",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.3.1",
+    "bcryptjs": "^2.4.3",
+    "graphql": "^14.0.2",
+    "graphql-import": "^0.7.1",
+    "jsonwebtoken": "^8.4.0"
+  }
+}

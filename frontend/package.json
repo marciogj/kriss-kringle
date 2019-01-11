@@ -1,0 +1,63 @@
+{
+  "name": "kriss-kringle-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "router": "^1.3.3",
+    "sockjs": "^0.3.19",
+    "vee-validate": "^2.1.5",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.2",
+    "vue-apollo": "^3.0.0-beta.11",
+    "graphql-type-json": "^0.2.1",
+    "lowdb": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "shortid": "^2.2.8"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "eslint-plugin-graphql": "^2.1.1",
+    "graphql-tag": "^2.9.0",
+    "vue-cli-plugin-apollo": "^0.19.1",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "plugins": [
+      "graphql"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
