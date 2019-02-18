@@ -38,7 +38,7 @@
     </div>
 
     <ApolloQuery
-      :query="require('../graphql/GetUsers.gql')"
+      :query="require('../graphql/GetAllPersonAnimals.gql')"
       
     >
       <template slot-scope="{ result: { loading, error, data } }">
@@ -46,17 +46,55 @@
         <div v-if="loading" class="loading apollo">Loading...</div>
 
         <!-- Error -->
-        <div v-else-if="error" class="error apollo">An error occured</div>
+        <div v-else-if="error" class="error apollo">An error occured: {{error}}</div>
 
         <!-- Result -->
-        <div v-else-if="data" class="result apollo">{{ data.getAllusers }}</div>
+        <div v-else-if="data" class="result apollo">
+          
+          <div class="card">
+            <div class="card-header">
+                Participantes
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" v-for="(participant, index) in data.getAllPersonAnimals" :key='index'>
+              {{participant.animal.name}} ({{participant.person.name}})
+              </li>
+           </ul>
+          </div>
+        </div>
 
         <!-- No result -->
         <div v-else class="no-result apollo">No result :(</div>
       </template>
     </ApolloQuery>
 
-            
+    <!-- -->
+
+
+    <ApolloQuery
+      :query="require('../graphql/MySecretAnimal.gql')"
+      
+    >
+      <template slot-scope="{ result: { loading, error, data } }">
+        <!-- Loading -->
+        <div v-if="loading" class="loading apollo">Loading...</div>
+
+        <!-- Error -->
+        <div v-else-if="error" class="error apollo">An error occured: {{error}}</div>
+
+        <!-- Result -->
+        <div v-else-if="data" class="result apollo">
+              
+              You: {{data.mySecretAnimal.person.name}} <br>
+              Your friend {{data.mySecretAnimal.friend.person.name}} - {{data.mySecretAnimal.friend.animal.name}}
+              
+        </div>
+          
+
+        <!-- No result -->
+        <div v-else class="no-result apollo">No result :(</div>
+      </template>
+    </ApolloQuery>
 
   </div>
 

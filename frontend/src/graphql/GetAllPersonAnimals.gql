@@ -1,0 +1,12 @@
+query {
+  getAllPersonAnimals {
+        id
+        person {
+            name
+        }
+        animal {
+            name
+            description
+        }
+    }
+}

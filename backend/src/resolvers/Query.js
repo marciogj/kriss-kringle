@@ -1,4 +1,5 @@
-const db = require('../memory-db.js')
+const db = require('../memory-db.js');
+const { APP_SECRET, getUserId } = require('../security/jwt-user.js');
 
 //function feed(parent, args, context, info) {
 //    return context.db.query.links({}, info)
@@ -17,20 +18,34 @@ const db = require('../memory-db.js')
   */
 
 
-function getAllusers(root, args, context, info) {
-    return db.users
+function getAllUsers(root, args, context, info) {
+    return db.users;
+}
+
+function getAllPersonAnimals(root, args, context, info) {
+  return db.personAnimals;
 }
 
 function krisskringle(root, args, context, info) {
-    return db.krisskringle
+    return db.krisskringle;
 }
 
 function mySecretAnimal(root, args, context, info) {
-    return db.secretAnimals[0]
+    console.log('mySecretAnimal');
+    console.log(JSON.stringify(context));
+    let user = context.user;
+    console.log('User: ' + user);
+    let secretAnimalsResult = db.secretAnimals.filter( sa => sa.person.id === user.id);
+    if (secretAnimalsResult.length == 1) {
+      return secretAnimalsResult[0];
+    }
+   
+    throw new Error('No secret animal associated'); 
 }
   
   module.exports = {
     mySecretAnimal,
     krisskringle,
-    getAllusers
+    getAllUsers,
+    getAllPersonAnimals
   }

@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { APP_SECRET, getUserId } = require('../utils')
+const { APP_SECRET, getUserId } = require('../security/jwt-user')
 const db = require('../memory-db.js')
 
 async function signup(parent, args, context, info) {
@@ -19,26 +19,24 @@ async function signup(parent, args, context, info) {
   }
   
   async function login(parent, args, context, info) {
-    //const user = await context.db.query.user({ where: { email: args.email } }, ` { id password } `)
-    let user = undefined;
-    db.users.forEach(u => {
-      if (u.email === args.email) {
-          user = u;
-      }
-    });
+    console.log('User Login');
+    console.log(args);
 
-    if (!user) {
-      throw new Error('No such user found')
-    }
-  
-    const valid = await bcrypt.compare(args.password, user.password)
+    //const user = await context.db.query.user({ where: { email: args.email } }, ` { id password } `)
+    let userResult = db.users.filter( u => u.email === args.email);
     
-    if (!valid) {
+    if (userResult.length != 1) {
+      throw new Error('No such user found');
+    }
+    let user = userResult[0];
+    console.log(user);
+    
+    const isValid = await bcrypt.compare(args.password, user.password);
+    if (!isValid) {
       throw new Error('Invalid password')
     }
   
-    const token = jwt.sign({ userId: user.id }, APP_SECRET)
-  
+    const token = jwt.sign({ userId: user.id }, APP_SECRET) 
     return {
       token,
       user,

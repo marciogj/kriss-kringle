@@ -1,6 +1,7 @@
 type Query {
   info: String!
-  getAllusers: [User!]!
+  getAllUsers: [User!]!
+  getAllPersonAnimals: [PersonAnimal!]!
   krisskringle: [KrissKringleAnimals!]!
   mySecretAnimal: SecretAnimal!
 }
